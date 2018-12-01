@@ -1,0 +1,62 @@
+#:import Toolbar kivymd.toolbar.Toolbar
+#:import ThemeManager kivymd.theming.ThemeManager
+#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
+#:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
+#:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
+#:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
+#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
+
+#:import MDList kivymd.list.MDList
+#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
+
+NavigationLayout:
+	id: nav_layout
+	MDNavigationDrawer:
+		id: nav_drawer
+		NavigationDrawerToolbar:
+			title: "Navigation Drawer"
+		NavigationDrawerIconButton:
+			icon: 'checkbox-blank-circle'
+			text: "Accordion"
+			#on_release: app.root.ids.scr_mngr.current = 'playlists'
+		NavigationDrawerIconButton:
+			icon: 'checkbox-blank-circle'
+			text: "button"
+			on_release: app.root.ids.scr_mngr.current = 'button'
+
+	BoxLayout:
+		orientation: 'vertical'
+		Toolbar:
+			id: toolbar
+			title: 'Play Music'
+			md_bg_color: app.theme_cls.primary_color
+			background_palette: 'Primary'
+			background_hue: '500'
+			left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
+			right_action_items: [['dots-vertical', lambda x: app.root.toggle_nav_drawer()]]
+
+		ScreenManager:
+			id: scr_mngr
+			Screen:
+                name: 'playlists'
+                ScrollView:
+                    do_scroll_x: False
+                    MDList:
+                        id: ml
+                        OneLineAvatarListItem:
+                            text: "Single-line item with avatar"
+                            AvatarSampleWidget:
+                                source: 'http://i.imgur.com/Lj68Cut.jpg'
+			Screen:
+				name: 'button'
+				BoxLayout:
+					size_hint: None, None
+					size: '88dp', '48dp'
+					padding: '12dp'
+					pos_hint: {'center_x': 0.75, 'center_y': 0.8}
+					MDLabel:
+						font_style: 'Body1'
+						theme_text_color: 'Primary'
+						text: "Disable buttons"
+						size_hint_x:None
+						width: '56dp'

@@ -1,0 +1,100 @@
+#: import ew kivy.uix.effectwidget
+#: import MaskEffect mask.MaskEffect
+
+#:import MDLabel kivymd.label.MDLabel
+#:import MDList kivymd.list.MDList
+#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
+
+Root:
+	EffectWidget:
+		id: mask
+		opacity: 0
+
+
+		FloatLayout:
+			id: mask_layout
+
+			BoxLayout:
+				size: root.width, 50
+				size_hint: None, None
+				pos: root.pos
+
+	BoxLayout:
+		id: main
+		orientation: 'vertical'
+
+		canvas.before:
+			Color:
+				rgb: 1, 1, 1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+
+		ScrollView:
+            do_scroll_x: False
+            MDList:
+                id: ml
+          
+                OneLineAvatarListItem:
+                    text: "sample text 1"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/any'
+                OneLineAvatarListItem:
+                    text: "sample text 2"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/animals'
+                OneLineAvatarListItem:
+                    text: "sample text 3"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/architecture'
+                OneLineAvatarListItem:
+                    text: "sample text 4"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/people'
+                OneLineAvatarListItem:
+                    text: "sample text 5"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/tech'
+                OneLineAvatarListItem:
+                    text: "sample text 6"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/any'
+                OneLineAvatarListItem:
+                    text: "sample text 7"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/animals'
+                OneLineAvatarListItem:
+                    text: "sample text 8"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/architecture'
+                OneLineAvatarListItem:
+                    text: "sample text 9"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/people'
+                OneLineAvatarListItem:
+                    text: "sample text 10"
+                    AvatarSampleWidget:
+                        source: 'http://placeimg.com/64/64/tech'
+                
+                
+
+                AsyncImage:
+					source: 'res/city.jpg'
+                
+
+	FloatLayout:
+		id: blur_layout
+
+		EffectWidget:
+			id: blur_effect
+			pos: root.pos
+			size: 0, 0
+			effects: [ew.HorizontalBlurEffect(size=5.0), ew.VerticalBlurEffect(size=5.0), ew.HorizontalBlurEffect(size=5.0), ew.VerticalBlurEffect(size=5.0), MaskEffect(mask=mask, mode='multiply'),]
+			background_color: 0, 0, 0, 0
+
+			BlurWidget:
+				source: main
+				mask: mask
+				mask_layout: mask_layout
+
+		
